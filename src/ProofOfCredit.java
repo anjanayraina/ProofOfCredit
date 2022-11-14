@@ -1,10 +1,1 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class ProofOfCredit {
-
-
-
-
-
-}
+// Working of Proof of Credit

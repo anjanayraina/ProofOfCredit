@@ -4,7 +4,7 @@ public class Node {
     private String publicKey;
     private String privateKey;
     boolean isMiner;
-    long credit;
+    int credit;
     long balance;
     static HashMap<String , Node> allNodes;
     public Blockchain blockchain;
@@ -23,10 +23,10 @@ public class Node {
     public void setMiner(boolean miner) {
         isMiner = miner;
     }
-    public long getCredit() {
+    public int getCredit() {
         return credit;
     }
-    public void setCredit(long credit) {
+    public void setCredit(int credit) {
         this.credit = credit;
     }
     public long getBalance() {
@@ -43,10 +43,6 @@ public class Node {
        this.isMiner = isMiner;
        this.blockchain = new Blockchain();
     }
-
-
-
-
 
 
 }

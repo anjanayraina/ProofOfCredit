@@ -7,6 +7,15 @@ public class Blockchain {
     public boolean isValidBlock(Block block ){
         return true;
     }
+    public boolean validateTransactoin(Transaction transaction){
+        return false;
+    }
+    public void rewardTokenForValidatoin(Node miner){
+        miner.setBalance(miner.getBalance() + 2);
+    }
+    public void deductTokenForFalseTransactoin(Node miner){
+        miner.setBalance(miner.getBalance() / 5);
+    }
     public void rewardCreditForValidation(Node miner){
         miner.setCredit(miner.getCredit() +1 );
     }
@@ -26,12 +35,11 @@ public class Blockchain {
         int max = Integer.MIN_VALUE;
         Node chosenMiner = null;
         for(Node miner  : allMiners){
-            int tempVal = rand.nextInt((int) (miner.getCredit() + miner.getBalance()/10));
+            int tempVal = rand.nextInt((int)(miner.getCredit() + miner.getBalance()/100));
             if(tempVal > max){
                 max= tempVal;
                 chosenMiner = miner;
             }
-
         }
         return chosenMiner;
 
