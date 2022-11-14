@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Blockchain {
     ArrayList<Block> allBlocks;
@@ -21,7 +22,18 @@ public class Blockchain {
     }
     public Node chooseMiner(){
         ArrayList<Node> allMiners = getAllMiners(Node.allNodes);
-        return null;
+        Random rand = new Random();
+        int max = Integer.MIN_VALUE;
+        Node chosenMiner = null;
+        for(Node miner  : allMiners){
+            int tempVal = rand.nextInt((int) (miner.getCredit() + miner.getBalance()/10));
+            if(tempVal > max){
+                max= tempVal;
+                chosenMiner = miner;
+            }
+
+        }
+        return chosenMiner;
 
     }
     Blockchain(){
