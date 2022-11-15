@@ -45,7 +45,7 @@ public class Node {
     }
     @Override
     public String toString(){
-        return this.publicKey;
+        return this.publicKey + this.privateKey;
     }
 
 
