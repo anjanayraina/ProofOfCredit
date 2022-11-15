@@ -7,9 +7,7 @@ public class Blockchain {
     public boolean isValidBlock(Block block ){
         return true;
     }
-    public boolean validateTransactoin(Transaction transaction){
-        return false;
-    }
+
     public void rewardTokenForValidatoin(Node miner){
         miner.setBalance(miner.getBalance() + 2);
     }
@@ -40,8 +38,23 @@ public class Blockchain {
                 max= tempVal;
                 chosenMiner = miner;
             }
+            else if(tempVal == max){
+                if(chosenMiner == null){
+                    max= tempVal;
+                    chosenMiner = miner;
+                }
+                else {
+                    if(chosenMiner.getBalance()  < miner.getBalance() ){
+                        max= tempVal;
+                        chosenMiner = miner;
+                    }
+                }
+            }
         }
         return chosenMiner;
+
+    }
+    public void addBlockInBlockchain(Block newBlock){
 
     }
     Blockchain(){

@@ -5,7 +5,7 @@ public class Node {
     private String privateKey;
     boolean isMiner;
     int credit;
-    long balance;
+    double balance;
     static HashMap<String , Node> allNodes;
     public Blockchain blockchain;
     public boolean canChangeNode(String publicKey){
@@ -29,10 +29,10 @@ public class Node {
     public void setCredit(int credit) {
         this.credit = credit;
     }
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
-    public void setBalance(long balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
     Node(String publicKey , String privateKey , boolean isMiner){
@@ -42,6 +42,10 @@ public class Node {
        this.balance = 0;
        this.isMiner = isMiner;
        this.blockchain = new Blockchain();
+    }
+    @Override
+    public String toString(){
+        return this.publicKey;
     }
 
 

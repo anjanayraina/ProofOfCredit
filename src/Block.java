@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class Block {
     Node validator;
-
     ArrayList<Transaction> transactions;
     long index;
     Timestamp timestamp;
