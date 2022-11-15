@@ -13,7 +13,7 @@ public class Node {
     boolean isMiner;
     int credit;
     double balance;
-    static HashMap<String , Node> allNodes;
+    static HashMap<String , Node> allNodes = new HashMap<>();
     public Blockchain blockchain;
     public boolean canChangeNode(String publicKey){
         return allNodes.get(publicKey).isMiner() && allNodes.get(publicKey).publicKey.equals(allNodes.get(this.getPublicKey()).publicKey);
@@ -37,6 +37,9 @@ public class Node {
         res.add(keypair.getPrivate());
         allNodes.put(Node.getPublicKeyString(keypair.getPublic()) , new Node(keypair.getPublic() , keypair.getPrivate() , isMiner));
         return res;
+    }
+    public boolean loginIntoAccount(String publicKey , String privateKey){
+        return false;
     }
     public static byte[] do_RSAEncryption(
             String plainText,
@@ -106,7 +109,7 @@ public class Node {
     Node(PublicKey publicKey , PrivateKey privateKey , boolean isMiner){
        this.publicKey = publicKey;
        this.privateKey = privateKey;
-       this.credit = 1;
+       this.credit = 0;
        this.balance = 0;
        this.isMiner = isMiner;
        this.blockchain = new Blockchain();

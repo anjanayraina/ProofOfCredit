@@ -1,7 +1,7 @@
 public class ProgramRunner {
     public void printTasks(){
         System.out.println("1) Login " +
-                "\n2) Create Account");
+                "\n2) Create Account" + "\n Press anything for exit!!");
     }
     public void enterPrivateKey(){
         System.out.println("Please enter your Private Key: ");
@@ -11,6 +11,9 @@ public class ProgramRunner {
     }
     public void createNewAccount(){
         System.out.println("New Account getting created!!");
+    }
+    public void loginYourAccount(){
+        System.out.println("Please enter your Public and Private Key : ");
     }
 
 }
