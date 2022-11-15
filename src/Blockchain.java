@@ -7,7 +7,6 @@ public class Blockchain {
     public boolean isValidBlock(Block block ){
         return true;
     }
-
     public void rewardTokenForValidatoin(Node miner){
         miner.setBalance(miner.getBalance() + 2);
     }
@@ -27,36 +26,52 @@ public class Blockchain {
         }
         return res;
     }
-    public Node chooseMiner(){
-        ArrayList<Node> allMiners = getAllMiners(Node.allNodes);
+    public Block chooseBlock(ArrayList<Block> blockList){
+
+
         Random rand = new Random();
         int max = Integer.MIN_VALUE;
-        Node chosenMiner = null;
-        for(Node miner  : allMiners){
-            int tempVal = rand.nextInt((int)(miner.getCredit() + miner.getBalance()/100));
+        Block chosenBlock = null;
+        for(Block block  : blockList){
+
+            int tempVal = rand.nextInt((int)(block.miner.getCredit() + block.miner.getBalance()/100));
             if(tempVal > max){
                 max= tempVal;
-                chosenMiner = miner;
+                chosenBlock = block;
             }
             else if(tempVal == max){
-                if(chosenMiner == null){
+                if(chosenBlock == null){
                     max= tempVal;
-                    chosenMiner = miner;
+                    chosenBlock = block;
                 }
                 else {
-                    if(chosenMiner.getBalance()  < miner.getBalance() ){
-                        max= tempVal;
-                        chosenMiner = miner;
+                    if(chosenBlock.miner.getBalance()  < chosenBlock.miner.getBalance() ){
+
+                        chosenBlock = block;
+                    }
+                    else if(chosenBlock.miner.getCredit() < chosenBlock.miner.getCredit()){
+
+                        chosenBlock = block;
                     }
                 }
             }
         }
-        return chosenMiner;
+        return chosenBlock;
 
     }
     public void addBlockInBlockchain(Block newBlock){
+        if(isValidBlock(newBlock)){
+            System.out.println("New Block has been added to the Blockchain!!");
+            allBlocks.add(newBlock);
+        }
+
+        else{
+            System.out.println("The Block is invalid!!");
+        }
 
     }
+
+//    public void validateOtherMinersBlock()
     Blockchain(){
         allBlocks  = new ArrayList<>();
     }

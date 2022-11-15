@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Node {
@@ -11,6 +12,10 @@ public class Node {
     public boolean canChangeNode(String publicKey){
         return allNodes.get(publicKey).isMiner() && allNodes.get(publicKey).publicKey.equals(allNodes.get(this.getPublicKey()).publicKey);
     }
+
+//    public ArrayList<String> generateNewPublicAndPrivateKeys(){
+//
+//    }
     public String getPublicKey() {
         return publicKey;
     }
