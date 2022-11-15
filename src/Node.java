@@ -1,14 +1,15 @@
+import javax.crypto.Cipher;
 import javax.xml.bind.DatatypeConverter;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Node {
-    private String publicKey;
-    private String privateKey;
+
+    private static final String RSA
+            = "RSA";
+    private PublicKey publicKey;
+    private PrivateKey privateKey;
     boolean isMiner;
     int credit;
     double balance;
@@ -18,7 +19,7 @@ public class Node {
         return allNodes.get(publicKey).isMiner() && allNodes.get(publicKey).publicKey.equals(allNodes.get(this.getPublicKey()).publicKey);
     }
 
-    public static ArrayList<String> generateNewPublicAndPrivateKeys() throws NoSuchAlgorithmException {
+    public static ArrayList<Object> generateNewPublicAndPrivateKeys() throws NoSuchAlgorithmException {
 
         SecureRandom secureRandom
                 = new SecureRandom();
@@ -28,19 +29,58 @@ public class Node {
 
         keyPairGenerator.initialize(
                 512, secureRandom);
-        ArrayList<String> res = new ArrayList<>();
+        ArrayList<Object> res = new ArrayList<>();
         KeyPair keypair= keyPairGenerator
                 .generateKeyPair();
-        res.add(DatatypeConverter.printHexBinary(
-                keypair.getPublic().getEncoded()));
-        res.add(DatatypeConverter.printHexBinary(
-                keypair.getPrivate().getEncoded()));
+        res.add(keypair.getPublic());
+        res.add(keypair.getPrivate());
         return res;
     }
-    public String getPublicKey() {
+    public static byte[] do_RSAEncryption(
+            String plainText,
+            PrivateKey privateKey)
+            throws Exception
+    {
+        Cipher cipher
+                = Cipher.getInstance(RSA);
+
+        cipher.init(
+                Cipher.ENCRYPT_MODE, privateKey);
+
+        return cipher.doFinal(
+                plainText.getBytes());
+    }
+
+    // Decryption function which converts
+    // the ciphertext back to the
+    // original plaintext.
+    public static String do_RSADecryption(
+            byte[] cipherText,
+            PublicKey publicKey)
+            throws Exception
+    {
+        Cipher cipher
+                = Cipher.getInstance(RSA);
+
+        cipher.init(Cipher.DECRYPT_MODE,
+                publicKey);
+        byte[] result
+                = cipher.doFinal(cipherText);
+
+        return new String(result);
+    }
+    public static String getPublicKeyString(PublicKey publicKey){
+        return DatatypeConverter.printHexBinary(
+                (publicKey).getEncoded());
+    }
+    public static String getPrivateKeyString(PrivateKey publicKey){
+        return DatatypeConverter.printHexBinary(
+                (publicKey).getEncoded());
+    }
+    public PublicKey getPublicKey() {
         return publicKey;
     }
-    public String getPrivateKey() {
+    public PrivateKey getPrivateKey() {
         return privateKey;
     }
     public boolean isMiner() {
@@ -61,7 +101,7 @@ public class Node {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-    Node(String publicKey , String privateKey , boolean isMiner){
+    Node(PublicKey publicKey , PrivateKey privateKey , boolean isMiner){
        this.publicKey = publicKey;
        this.privateKey = privateKey;
        this.credit = 1;
@@ -71,7 +111,7 @@ public class Node {
     }
     @Override
     public String toString(){
-        return this.publicKey + this.privateKey;
+        return Node.getPublicKeyString(publicKey) + Node.getPrivateKeyString(privateKey);
     }
 
 
