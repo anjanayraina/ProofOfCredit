@@ -19,7 +19,7 @@ public class Node {
         return allNodes.get(publicKey).isMiner() && allNodes.get(publicKey).publicKey.equals(allNodes.get(this.getPublicKey()).publicKey);
     }
 
-    public static ArrayList<Object> generateNewPublicAndPrivateKeys() throws NoSuchAlgorithmException {
+    public static ArrayList<Object> generateNewPublicAndPrivateKeys(boolean isMiner) throws NoSuchAlgorithmException {
 
         SecureRandom secureRandom
                 = new SecureRandom();
@@ -32,8 +32,10 @@ public class Node {
         ArrayList<Object> res = new ArrayList<>();
         KeyPair keypair= keyPairGenerator
                 .generateKeyPair();
+        if(allNodes.containsKey(Node.getPublicKeyString(keypair.getPublic())))return generateNewPublicAndPrivateKeys(isMiner);
         res.add(keypair.getPublic());
         res.add(keypair.getPrivate());
+        allNodes.put(Node.getPublicKeyString(keypair.getPublic()) , new Node(keypair.getPublic() , keypair.getPrivate() , isMiner));
         return res;
     }
     public static byte[] do_RSAEncryption(

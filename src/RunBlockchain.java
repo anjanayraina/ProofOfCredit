@@ -19,7 +19,7 @@ public class RunBlockchain {
         else if(ch == 2){
             ArrayList<Object> res = Node.generateNewPublicAndPrivateKeys();
             System.out.println("Your keys are : " + "\n Public Key : " + Node.getPublicKeyString((PublicKey) res.get(0))+ "\n Private Key : "  +Node.getPrivateKeyString((PrivateKey) res.get(1)));
-            System.out.println(Node.do_RSADecryption(Node.do_RSAEncryption("Name" , (PrivateKey) res.get(1)), (PublicKey) res.get(0)));
+//            System.out.println(Node.do_RSADecryption(Node.do_RSAEncryption("Name" , (PrivateKey) res.get(1)), (PublicKey) res.get(0)));
         }
         else{
             System.out.println("please enter a valid entry!");
