@@ -15,7 +15,7 @@ public class Node {
     double balance;
     static HashMap<String , Node> allNodes = new HashMap<>();
     public Blockchain blockchain;
-    public boolean canChangeNode(String publicKey){
+    public boolean canChangeBlock(String publicKey){
         return allNodes.get(publicKey).isMiner() && allNodes.get(publicKey).publicKey.equals(allNodes.get(this.getPublicKey()).publicKey);
     }
 
@@ -56,9 +56,7 @@ public class Node {
                 plainText.getBytes());
     }
 
-    // Decryption function which converts
-    // the ciphertext back to the
-    // original plaintext.
+
     public static String do_RSADecryption(
             byte[] cipherText,
             PublicKey publicKey)
@@ -81,6 +79,20 @@ public class Node {
     public static String getPrivateKeyString(PrivateKey publicKey){
         return DatatypeConverter.printHexBinary(
                 (publicKey).getEncoded());
+    }
+
+    public static  Node getNode(String publicKey ,String privateKey){
+        if(!allNodes.containsKey(publicKey)){
+            System.out.println("Private Key not found!!");
+            return null;
+        }
+
+        Node temp = allNodes.get(publicKey);
+        if(!Node.getPrivateKeyString(temp.getPrivateKey()).equals(privateKey)){
+            System.out.println("Your Private Key doest macth the public key");
+            return null;
+        }
+        return temp;
     }
     public PublicKey getPublicKey() {
         return publicKey;

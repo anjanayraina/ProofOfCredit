@@ -12,8 +12,6 @@ public class ProgramRunner {
     public void createNewAccount(){
         System.out.println("New Account getting created!!");
     }
-    public void loginYourAccount(){
-        System.out.println("Please enter your Public and Private Key : ");
-    }
+
 
 }

@@ -15,7 +15,10 @@ public class RunBlockchain {
         runner.printTasks();
         int ch = scn.nextInt();
         if(ch == 1){
-            runner.loginYourAccount();
+            runner.enterPublicKey();
+            String publicKey = scn.nextLine();
+            runner.enterPrivateKey();
+            String privateKey = scn.nextLine();
         }
         else if(ch == 2){
             System.out.println("Do you want to register as a miner : y/n ");
@@ -25,9 +28,17 @@ public class RunBlockchain {
             ArrayList<Object> res = Node.generateNewPublicAndPrivateKeys(isMiner);
             System.out.println("Your keys are : " + "\n Public Key : " + Node.getPublicKeyString((PublicKey) res.get(0))+ "\n Private Key : "  +Node.getPrivateKeyString((PrivateKey) res.get(1)));
 //            System.out.println(Node.do_RSADecryption(Node.do_RSAEncryption("Name" , (PrivateKey) res.get(1)), (PublicKey) res.get(0)));
+            runner.enterPublicKey();
+            String publicKey = scn.nextLine();
+            runner.enterPrivateKey();
+            String privateKey = scn.nextLine();
+            Node user = Node.getNode(publicKey , privateKey);
+            if(user == null) System.out.println("User Not found!");
+            else
+                System.out.println("user found");
         }
         else{
-            System.out.println("please enter a valid entry!");
+            System.out.println("Program Exiting!!");
         }
 
 
