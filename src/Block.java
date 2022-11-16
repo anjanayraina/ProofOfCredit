@@ -20,4 +20,7 @@ public class Block {
         this.miner = miner;
 
     }
+    public boolean isTransactoinValid(Transaction transaction){
+        return true;
+    }
 }
