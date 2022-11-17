@@ -14,6 +14,8 @@ public class Node {
     int credit;
     double balance;
     static HashMap<String , Node> allNodes = new HashMap<>();
+    static ArrayList<Block> proposeBlocks= new ArrayList<>();
+
     public Blockchain blockchain;
     public boolean canChangeBlock(String publicKey){
         return allNodes.get(publicKey).isMiner() && allNodes.get(publicKey).publicKey.equals(allNodes.get(this.getPublicKey()).publicKey);

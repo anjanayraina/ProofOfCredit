@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Blockchain {
-
+    static boolean genesisCreated= false;
     ArrayList<Block> allBlocks;
     public boolean isValidBlock(Block block ){
         return true;
@@ -27,7 +27,7 @@ public class Blockchain {
         }
         return res;
     }
-    public Block chooseBlock(ArrayList<Block> blockList){
+    public static  Block chooseBlock(ArrayList<Block> blockList){
         Random rand = new Random();
         int max = Integer.MIN_VALUE;
         Block chosenBlock = null;
@@ -70,9 +70,13 @@ public class Blockchain {
 
     }
 
-//    public void validateOtherMinersBlock()
+
     Blockchain(){
         allBlocks  = new ArrayList<>();
+        if(!genesisCreated){
+//            allBlocks.add(new Block());
+            genesisCreated = true;
+        }
     }
 
 
