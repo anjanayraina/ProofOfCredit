@@ -12,41 +12,48 @@ public class RunBlockchain {
         System.out.println("Welcome to your wallet!!" +
                 "\n Please Enter the task that you would like to perform : ");
         ProgramRunner runner = new ProgramRunner();
-        runner.printTasks();
-        int ch = scn.nextInt();
-        if(ch == 1){
-            runner.enterPublicKey();
-            String publicKey = scn.nextLine();
-            runner.enterPrivateKey();
-            String privateKey = scn.nextLine();
-            Node user = Node.getNode(publicKey , privateKey);
-            if(user == null) System.out.println("User Not found!");
-            else {
-                System.out.println("user found");
-                while(true){
+        while(true) {
+            runner.printTasks();
+            int ch = scn.nextInt();
+            if (ch == 1) {
+                runner.enterPublicKey();
+                String publicKey = scn.nextLine();
+                runner.enterPrivateKey();
+                String privateKey = scn.nextLine();
+                Node user = Node.getNode(publicKey, privateKey);
+                if (user == null) System.out.println("User Not found!");
+                else {
+                    System.out.println("User found");
+                    while (true) {
+                        break;
+                    }
 
                 }
-
+            } else if (ch == 2) {
+                System.out.println("Do you want to register as a miner : y/n ");
+                scn.nextLine();
+                String y = scn.nextLine();
+                boolean isMiner = y.equals("y");
+                ArrayList<Object> res = Node.generateNewPublicAndPrivateKeys(isMiner);
+                System.out.println("Your keys are : " + "\n Public Key : " + Node.getPublicKeyString((PublicKey) res.get(0)) + "\n Private Key : " + Node.getPrivateKeyString((PrivateKey) res.get(1)));
+                runner.enterPublicKey();
+                String publicKey = scn.nextLine();
+                runner.enterPrivateKey();
+                String privateKey = scn.nextLine();
+                Node user = Node.getNode(publicKey, privateKey);
+                if (user == null) System.out.println("User Not found!");
+                else
+                {
+                    System.out.println("user found");
+                    while(true){
+                        break;
+                    }
+                    System.out.println("Still in the outer loop");
+                }
+            } else {
+                System.out.println("Program Exiting!!");
+                break;
             }
-        }
-        else if(ch == 2){
-            System.out.println("Do you want to register as a miner : y/n ");
-            scn.nextLine();
-            String y = scn.nextLine();
-            boolean isMiner = y.equals("y");
-            ArrayList<Object> res = Node.generateNewPublicAndPrivateKeys(isMiner);
-            System.out.println("Your keys are : " + "\n Public Key : " + Node.getPublicKeyString((PublicKey) res.get(0))+ "\n Private Key : "  +Node.getPrivateKeyString((PrivateKey) res.get(1)));
-            runner.enterPublicKey();
-            String publicKey = scn.nextLine();
-            runner.enterPrivateKey();
-            String privateKey = scn.nextLine();
-            Node user = Node.getNode(publicKey , privateKey);
-            if(user == null) System.out.println("User Not found!");
-            else
-                System.out.println("user found");
-        }
-        else{
-            System.out.println("Program Exiting!!");
         }
 
 
