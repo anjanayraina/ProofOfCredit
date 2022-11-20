@@ -133,5 +133,10 @@ public class Node {
         return Node.getPublicKeyString(publicKey) + Node.getPrivateKeyString(privateKey);
     }
 
+    public void lookIntoOtherBlockchains(){
+
+    }
+
+
 
 }

@@ -73,10 +73,6 @@ public class Blockchain {
 
     Blockchain(){
         allBlocks  = new ArrayList<>();
-        if(!genesisCreated){
-//            allBlocks.add(new Block());
-            genesisCreated = true;
-        }
     }
 
 

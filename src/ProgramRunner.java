@@ -11,13 +11,16 @@ public class ProgramRunner {
     }
     public void normalFunctions(){
         System.out.println("1) Send Transaction");
-        System.out.println("2) Log Off");
+        System.out.println("2) Check your Balance");
+        System.out.println("3) Log Off");
     }
     public void minerFunctions(){
         System.out.println("1) Send Transaction");
         System.out.println("2) Validate Other Blocks ");
         System.out.println("3) Add block in the Blockchain");
-        System.out.println("4) Log Off");
+        System.out.println("4) Check your Balance");
+        System.out.println("4) Check your Credit");
+        System.out.println("5) Log Off");
     }
     public void sendTransaction(){
         System.out.println("Please enter the address of the Payee and the amount");
