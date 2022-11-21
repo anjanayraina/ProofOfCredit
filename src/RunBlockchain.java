@@ -39,8 +39,7 @@ public class RunBlockchain {
                 runner.enterPublicKey();
                 String publicKey = scn.nextLine();
                 runner.enterPrivateKey();
-                String privateKey = scn.nextLine
-                        ();
+                String privateKey = scn.nextLine();
                 Node user = Node.getNode(publicKey, privateKey);
                 if (user == null) System.out.println("User Not found!");
                 else

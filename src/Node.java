@@ -132,9 +132,25 @@ public class Node {
     public String toString(){
         return Node.getPublicKeyString(publicKey) + Node.getPrivateKeyString(privateKey);
     }
+    class Wrapper{
+        Blockchain blockchain;
+        int count;
+        Wrapper(Blockchain blockchain , int count){
+            this.blockchain = blockchain;
+            this.count = count;
 
+        }
+    }
+
+    public Blockchain coopyAnotherChain(Blockchain blockchain){
+        Blockchain
+    }
     public void lookIntoOtherBlockchains(){
+        StringBuilder str  = new StringBuilder();
+        HashMap<String , >
+        for(String i  : allNodes.keySet()){
 
+        }
     }
 
 
