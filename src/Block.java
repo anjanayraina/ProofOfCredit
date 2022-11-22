@@ -16,6 +16,7 @@ public class Block {
         this.data = data;
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
+        this.hash  = calculateHash();
     }
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
@@ -70,8 +71,8 @@ public class Block {
         return calculatedhash;
     }
 
-
-    public boolean isTransactoinValid(Transaction transaction){
-        return true;
-    }
+//
+//    public boolean isTransactoinValid(Transaction transaction){
+//        return true;
+//    }
 }
