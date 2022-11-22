@@ -4,25 +4,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Block {
-    public static Block oldBlock = null;
-    Node miner;
-    ArrayList<Transaction> transactions;
-    long index;
-    Timestamp timestamp;
-    String prevHash;
-    String currentHash;
-    String data;
-    Block(String currentHash ,  String data , long index , ArrayList<Transaction> transactions, Node miner){
-        this.timestamp = new Timestamp(System.currentTimeMillis());
-        this.prevHash = oldBlock.prevHash;
-        this.currentHash =currentHash;
-        this.data = data;
-        this.index = index;
-        this.transactions = transactions;
-        this.miner = miner;
+    public String hash;
+    public String previousHash;
+    private String data;
+    private long timeStamp;
 
+    public Block(String data,String previousHash ) {
+        this.data = data;
+        this.previousHash = previousHash;
+        this.timeStamp = new Date().getTime();
     }
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
@@ -50,10 +43,33 @@ public class Block {
         return hexString.toString();
     }
 
-    public static String getHash(Block block) throws NoSuchAlgorithmException {
-        String allTransactionsString = block.transactions.toString();
-        return toHexString(getSHA(allTransactionsString));
+    public static String applySha256(String input){
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            byte[] hash = digest.digest(input.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    public String calculateHash() {
+        String calculatedhash = applySha256(
+                previousHash +
+                        Long.toString(timeStamp) +
+                        data
+        );
+        return calculatedhash;
+    }
+
 
     public boolean isTransactoinValid(Transaction transaction){
         return true;
