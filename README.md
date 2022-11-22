@@ -1,2 +1,2 @@
-# OwnBlockchain
-##                                                            Proof of Credit
+#                                                                Proof of Credit 
+
